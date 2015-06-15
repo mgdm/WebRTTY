@@ -1,0 +1,18 @@
+{
+  "name": "webrtty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "./node_modules/.bin/browserify -t babelify -p [ minifyify --no-map ] main.js -o output.js",
+    "watch": "./node_modules/.bin/watchify -d -t babelify main.js -o output.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^5.5.8",
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.4",
+    "watchify": "^3.2.2"
+  }
+}
