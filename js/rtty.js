@@ -60,7 +60,7 @@ export default class RTTY
             '–': '00011',
             'Bell': '00101',
             '$': '01001',
-            ' !': '01101',
+            '!': '01101',
             '&': '11010',
             '#': '10100',
             '\'': '01011',
@@ -68,14 +68,17 @@ export default class RTTY
             ')': '10010',
             '"': '10001',
             '/': '11101',
-            ' :': '01110',
-            ' ;': '11110',
-            ' ?': '11001',
+            ':': '01110',
+            ';': '11110',
+            '?': '11001',
             ',': '01100',
             '.': '11100',
             "\r": '01000',
             "\n": '00010'
         };
+
+         this.figureShift = '11011';
+         this.letterShift = '11111';
     }
 
     getContext() {
@@ -88,12 +91,27 @@ export default class RTTY
     }
 
     convertToBinary(chars) {
+        var self = this;
         let charCodes = [];
         chars = chars.toUpperCase();
 
+        let inLetters = true;
         for (var i = 0; i < chars.length; i++) {
-            if (this.letters[chars.charAt(i)]) {
-                charCodes.push(this.letters[chars.charAt(i)].split('').reverse().join(""));
+            let val = chars.charAt(i);
+            if (this.letters[val]) {
+                if (!inLetters) {
+                    charCodes.push(this.letterShift);
+                    inLetters = true;
+                }
+
+                charCodes.push(this.letters[val].split('').reverse().join(""));
+            } else if (this.figures[val]) {
+                if (inLetters) {
+                    charCodes.push(this.figureShift);
+                    inLetters = false;
+                }
+
+                charCodes.push(this.figures[val].split('').reverse().join(""));
             }
         }
 
