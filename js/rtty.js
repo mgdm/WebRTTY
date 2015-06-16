@@ -113,17 +113,19 @@ export default class RTTY
                 return r + '0' + c + '11';
             }, '') + '0';
 
-        var samplePosition = 0;
+        let samplePosition = 0;
+        let theta = 0.0;
+
         for (let char = 0; char < digits.length; char++) {
             let digit = digits[char];
             let frequency = digit === '1' ? this.markFreq : this.spaceFreq;
-
-            /* Add some extra samples to get to a smooth zero crossing */
             let symbolSamples = Math.floor(44100 / 45.45) + Math.round(44100 / frequency);
-            let j = 0;
+            let omega = frequency * 2 * Math.PI / 44100;
 
+            let j = 0;
             for (j = 0; j < symbolSamples; j++) {
-                data[samplePosition + j] = Math.sin(frequency * 2 * Math.PI * (samplePosition + j) / 44100);
+                data[samplePosition + j] = Math.sin(theta);
+                theta += omega;
             }
 
             samplePosition += j;

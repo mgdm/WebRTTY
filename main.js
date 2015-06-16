@@ -13,17 +13,15 @@ function go(window, document) {
         source.buffer = buffer;
         source.connect(context.destination);
         source.start();
+    }, true);
+
+    document.getElementById('rttyDownload').addEventListener('click', function (e) {
+        e.preventDefault();
+        var elem = document.getElementById('rttyChars');
+        var buffer = rtty.encode(elem.value);
 
         rtty.writeWav(buffer);
     }, true);
-
-    /*
-     var filter = c.createBiquadFilter();
-     filter.type = "lowpass";
-     filter.frequency.value = 4000;
-     filter.connect(c.destination);
-     */
-
 
 }
 
