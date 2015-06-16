@@ -170,9 +170,6 @@ export default class RTTY
         var index = 44;
         var volume = 1;
         for (var i = 0; i < lng; i++){
-            if (i % 1000 == 0) {
-                console.log("Sample", data[i]);
-            }
             view.setInt16(index, data[i] * 0x7FFF, true);
             index += 2;
         }
