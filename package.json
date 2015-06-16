@@ -13,6 +13,7 @@
     "babel": "^5.5.8",
     "babelify": "^6.1.2",
     "browserify": "^10.2.4",
-    "watchify": "^3.2.2"
+    "watchify": "^3.2.2",
+    "minifyify": "~7.0.1"
   }
 }
