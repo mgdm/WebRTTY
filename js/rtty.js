@@ -108,6 +108,7 @@ export default class RTTY
         let binary = this.convertToBinary(chars);
         let buffer = this.context.createBuffer(1, messageSamples, 44100);
         let data = buffer.getChannelData(0);
+        let samplesPerSymbol = Math.floor(44100 / 45.45);
 
         let digits = '0' + binary.reduce(function(r, c) {
                 return r + '0' + c + '11';
@@ -119,11 +120,10 @@ export default class RTTY
         for (let char = 0; char < digits.length; char++) {
             let digit = digits[char];
             let frequency = digit === '1' ? this.markFreq : this.spaceFreq;
-            let symbolSamples = Math.floor(44100 / 45.45) + Math.round(44100 / frequency);
             let omega = frequency * 2 * Math.PI / 44100;
 
             let j = 0;
-            for (j = 0; j < symbolSamples; j++) {
+            for (j = 0; j < samplesPerSymbol; j++) {
                 data[samplePosition + j] = Math.sin(theta);
                 theta += omega;
             }
