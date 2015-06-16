@@ -8,10 +8,8 @@ export default class RTTY
         this.context = context;
 
         this.timePerBit = 1 / 45.45;
-        //this.spaceFreq = 2295;
-        //this.markFreq = 2125;
-         this.spaceFreq = 1000;
-         this.markFreq = 1170;
+        this.spaceFreq = 2295;
+        this.markFreq = 2125;
 
         this.letters = {
             "\0": '00000',
@@ -95,7 +93,7 @@ export default class RTTY
 
         for (var i = 0; i < chars.length; i++) {
             if (this.letters[chars.charAt(i)]) {
-                charCodes.push(this.letters[chars.charAt(i)]);
+                charCodes.push(this.letters[chars.charAt(i)].split('').reverse().join(""));
             }
         }
 
@@ -110,9 +108,9 @@ export default class RTTY
         let data = buffer.getChannelData(0);
         let samplesPerSymbol = Math.floor(44100 / 45.45);
 
-        let digits = '0' + binary.reduce(function(r, c) {
+        let digits = '111111111111111' + binary.reduce(function(r, c) {
                 return r + '0' + c + '11';
-            }, '') + '0';
+            }, '') + '111111111111111';
 
         let samplePosition = 0;
         let theta = 0.0;
