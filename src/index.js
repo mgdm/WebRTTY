@@ -1,4 +1,4 @@
-import RTTY from './js/rtty';
+import RTTY from './rtty';
 
 function go(window, document) {
     var context = new AudioContext();

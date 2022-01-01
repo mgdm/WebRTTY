@@ -198,8 +198,6 @@ export default class RTTY
         var link = window.document.createElement('a');
         link.href = url;
         link.download = 'output.wav';
-        var click = document.createEvent("Event");
-        click.initEvent("click", true, true);
-        link.dispatchEvent(click);
+        link.click();
     }
 }

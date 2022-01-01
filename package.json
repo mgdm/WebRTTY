@@ -2,18 +2,19 @@
   "name": "webrtty",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "private": true,
   "scripts": {
-    "build": "./node_modules/.bin/browserify -t babelify -p [ minifyify --no-map ] main.js -o output.js",
-    "watch": "./node_modules/.bin/watchify -d -t babelify main.js -o output.js"
+    "build": "npx webpack",
+    "watch": "npx webpack watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel": "^5.5.8",
-    "babelify": "^6.1.2",
-    "browserify": "^10.2.4",
-    "watchify": "^3.2.2",
-    "minifyify": "~7.0.1"
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "acorn": "^8.7.0",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   }
 }
